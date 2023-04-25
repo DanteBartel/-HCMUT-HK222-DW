@@ -160,6 +160,5 @@ cython_debug/
 #.idea/
 
 # Others
-Final.csv
-FinalGrowth.csv
+csv/
 Visualize.pbix
