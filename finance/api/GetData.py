@@ -37,7 +37,7 @@ def get_ticker_hst(ticker, period):
     df = df.reset_index().rename(columns={'index': 'Date'})
     df = df.drop(labels=['Dividends', 'Stock Splits'], axis=1)
     df['Adj Close'] = 0
-    name = ticker + '_hst.csv'
+    name = 'Final.csv'
     df.to_csv(DIR + f'{name}', index = False, header = True)
     return df
 
@@ -57,5 +57,7 @@ def get_earnings_history(ticker):
         df['Earnings Date'][ind] = pd.to_datetime(df['Earnings Date'][ind]).date()
     df = df.reset_index()
     df['EPS Estimate'] = df['EPS Estimate'].astype(float)
+    date = df['Earnings Date'][0].replace(year = df['Earnings Date'][0].year - 5)
+    df = df[df['Earnings Date'] > date]
     df.to_csv(DIR + f'{name}', index = False, header = True)
     return df
