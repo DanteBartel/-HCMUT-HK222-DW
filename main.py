@@ -1,10 +1,7 @@
 import pandas as pd
 from GetData import get_ticker_hst, get_earnings_history
 from CalGrowth import calGrowth
-from glo import *
-
-INPUTTICKER = 'aapl'
-PERIOD = '5y'
+from Global import *
 
 get_ticker_hst(INPUTTICKER, PERIOD)
 
