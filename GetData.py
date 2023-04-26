@@ -1,9 +1,10 @@
 from yahoo_fin import *
-import yfinance as yf 
+import yfinance as yf
 import yahoo_fin as y_f
 import pandas as pd
 from yahoo_fin import stock_info as si
 import numpy as np
+from glo import *
 
 industry_ticker = {
     "Basic Materials": ['BHP','LIN','RIO','CTA-PB','APD','VALE','SCCO','SHW'],
@@ -55,7 +56,7 @@ def get_ticker_hst(ticker, period):
     df = df.drop(labels=['Dividends', 'Stock Splits'], axis=1)
     df['Adj Close'] = 0
     name = ticker + '_hst.csv'
-    df.to_csv(f'E:\HCMUT\Data Warehouse\Stock\-HCMUT-HK222-DW\csv\{name}', index = True, header = True)
+    df.to_csv(DIR + f'{name}', index = True, header = True)
     return df
 
 def get_earnings_history(ticker):
@@ -72,14 +73,14 @@ def get_earnings_history(ticker):
     for ind in df.index:
         df['Earnings Date'][ind] = df['Earnings Date'][ind][0:12]
         df['Earnings Date'][ind] = pd.to_datetime(df['Earnings Date'][ind])
-        print(df['Earnings Date'][ind])
-    df.to_csv(f'E:\HCMUT\Data Warehouse\Stock\-HCMUT-HK222-DW\csv\{name}', index = True, header = True)
+        # print(df['Earnings Date'][ind])
+    df.to_csv(DIR + f'{name}', index = True, header = True)
     return df
 
 # get_company_info('aapl', 'industry')
 # get_ticker_hst('aapl', "1mo")
 # get_earnings_history('aapl')
-a = get_industry_by_ticker('GOOG')
-print(a)
-print(a[0])
-get_company_info(a[0], 'sector')
+# a = get_industry_by_ticker('GOOG')
+# print(a)
+# print(a[0])
+# get_company_info(a[0], 'sector')

@@ -4,19 +4,24 @@ import matplotlib.pyplot as plt
 from sklearn.linear_model import LinearRegression
 import pandas as pd
 from pandas import *
-from test import get_ticker_hst
 from datetime import datetime
 
 def calGrowth(df: DataFrame):
     # Making x and y
-    x_train = df.index.values.copy()
-    y_train = df['Close'].values.copy()
+    x_train = df['Earnings Date'].values.copy()
+    y_train = df['EPS Estimate'].values.copy()
+
+    # Flip the dimensions
+    x_train = np.flip(x_train)
+    y_train = np.flip(y_train)
 
     # Convert datetime.date into int
     for i in range(x_train.shape[0]):
-        dt = datetime.combine(x_train[i], datetime.min.time())
-        sec = int(dt.timestamp())
+        # dt = datetime.combine(x_train[i], datetime.min.time())
+        # sec = int(dt.timestamp())
+        sec = int(x_train[i].timestamp())
         x_train[i] = sec
+        y_train[i] = float(y_train[i])
     
     # Reshape x
     x_train = x_train.reshape((-1,1))
@@ -36,11 +41,11 @@ def calGrowth(df: DataFrame):
     plt.show()
 
     # Recalculate the growth rate
-    x1 = df.index.values[0]
-    x1Number = int(datetime.combine(x1, datetime.min.time()).timestamp())
+    x1 = df['Earnings Date'].values[0]
+    x1Number = int(x1.timestamp())
     x1Number = np.array(x1Number).reshape((1,1))
     x2 = x1.replace(year = x1.year + 1)
-    x2Number = int(datetime.combine(x2, datetime.min.time()).timestamp())
+    x2Number = int(x2.timestamp())
     x2Number = np.array(x2Number).reshape((1,1))
     y1 = model.predict(x1Number)
     y2 = model.predict(x2Number)
@@ -49,5 +54,5 @@ def calGrowth(df: DataFrame):
     # return the growth rate
     return slope
 
-df = get_ticker_hst('aapl', '1mo')
-print(calGrowth(df))
+# df = get_ticker_hst('aapl', '1mo')
+# print(calGrowth(df))

@@ -161,4 +161,5 @@ cython_debug/
 
 # Others
 csv/
+glo.py
 Visualize.pbix
