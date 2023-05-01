@@ -11,7 +11,7 @@ import json
 
 from api.GetData import *
 from api.CalGrowth import *
-from finance.Global import *
+from Global import *
 
 # from api.serializers import PriceSerializer, SectorSerializer, StockSerializer
 from api.serializers import StockSerializer

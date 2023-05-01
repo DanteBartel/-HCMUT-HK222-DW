@@ -162,4 +162,3 @@ cython_debug/
 # Others
 csv/
 Global.py
-Visualize.pbix
