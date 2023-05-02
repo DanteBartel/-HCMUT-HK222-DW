@@ -1,6 +1,6 @@
 import pandas as pd
-from GetData import get_ticker_hst, get_earnings_history
-from CalGrowth import calGrowth
+from api.GetData import *
+from api.CalGrowth import *
 from Global import *
 
 ticket = 'goog'

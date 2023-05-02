@@ -18,7 +18,7 @@ def get_company_info(ticker, attribute):
         result = com_info.info
     else:
         result = com_info.info[attribute]
-    print(result)
+    # print(result)
     return result
 
 def get_industry_by_ticker(ticker):
@@ -37,8 +37,8 @@ def get_ticker_hst(ticker, period):
     df = df.reset_index().rename(columns={'index': 'Date'})
     df = df.drop(labels=['Dividends', 'Stock Splits'], axis=1)
     df['Adj Close'] = 0
-    name = 'Final.csv'
-    df.to_csv(DIR + f'{name}', index = False, header = True)
+    # name = 'Final.csv'
+    # df.to_csv(DIR + f'{name}', index = False, header = True)
     return df
 
 def get_earnings_history(ticker):
@@ -46,7 +46,6 @@ def get_earnings_history(ticker):
     headers = {'User-agent': 'Mozilla/5.0'}
 
     table = pd.read_html(requests.get(url, headers=headers).text)
-    name = ticker + '_eps.csv'
     df = table[0]
     df = df.drop('Reported EPS', axis=1)
     df = df.drop('Surprise(%)', axis=1)
@@ -59,5 +58,6 @@ def get_earnings_history(ticker):
     df['EPS Estimate'] = df['EPS Estimate'].astype(float)
     date = df['Earnings Date'][0].replace(year = df['Earnings Date'][0].year - 5)
     df = df[df['Earnings Date'] > date]
-    df.to_csv(DIR + f'{name}', index = False, header = True)
+    # name = ticker + '_eps.csv'
+    # df.to_csv(DIR + f'{name}', index = False, header = True)
     return df
